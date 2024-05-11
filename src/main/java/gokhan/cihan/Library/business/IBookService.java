@@ -1,14 +1,13 @@
 package gokhan.cihan.Library.business;
 
 import gokhan.cihan.Library.entity.Book;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface IBookService {
 
     Book getById(long id);
 
-    List<Book> getAll(int page, int pageSize);
+    Page<Book> getAll(int page, int pageSize);
 
     Book save(Book book);
 

@@ -1,14 +1,13 @@
 package gokhan.cihan.Library.business;
 
 import gokhan.cihan.Library.entity.Category;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface ICategoryService {
 
     Category getById(long id);
 
-    List<Category> getAll(int page, int pageSize);
+    Page<Category> getAll(int page, int pageSize);
 
     Category save(Category category);
 

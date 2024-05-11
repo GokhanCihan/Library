@@ -1,14 +1,13 @@
 package gokhan.cihan.Library.business;
 
 import gokhan.cihan.Library.entity.Author;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface IAuthorService {
 
     Author getById(long id);
 
-    List<Author> getAll(int page, int pageSize);
+    Page<Author> getAll(int page, int pageSize);
 
     Author save(Author author);
 
