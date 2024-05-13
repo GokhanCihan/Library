@@ -1,18 +1,20 @@
 package gokhan.cihan.Library.business;
 
-import gokhan.cihan.Library.entity.Category;
-import org.springframework.data.domain.Page;
+import gokhan.cihan.Library.dto.request.CategoryRequest;
+import gokhan.cihan.Library.dto.response.CategoryResponse;
+
+import java.util.List;
 
 public interface ICategoryService {
 
-    Category getById(long id);
+    CategoryResponse getById(Long id);
 
-    Page<Category> getAll(int page, int pageSize);
+    List<CategoryResponse> getAll();
 
-    Category save(Category category);
+    CategoryResponse create(CategoryRequest categoryRequest);
 
-    Category update(Category category);
+    CategoryResponse update(Long id, CategoryRequest categoryRequest);
 
-    boolean delete(long id);
+    void delete(Long id);
 
 }

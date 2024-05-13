@@ -1,18 +1,20 @@
 package gokhan.cihan.Library.business;
 
-import gokhan.cihan.Library.entity.Borrowing;
-import org.springframework.data.domain.Page;
+import gokhan.cihan.Library.dto.request.BorrowingRequest;
+import gokhan.cihan.Library.dto.response.BorrowingResponse;
+
+import java.util.List;
 
 public interface IBorrowingService {
 
-    Borrowing getById(long id);
+    BorrowingResponse getById(Long id);
 
-    Page<Borrowing> getAll(int page, int pageSize);
+    List<BorrowingResponse> getAll();
 
-    Borrowing save(Borrowing borrowing);
+    BorrowingResponse create(BorrowingRequest borrowingRequest);
 
-    Borrowing update(Borrowing borrowing);
+    BorrowingResponse update(Long id, BorrowingRequest borrowingRequest);
 
-    boolean delete(long id);
+    void delete(Long id);
 
 }

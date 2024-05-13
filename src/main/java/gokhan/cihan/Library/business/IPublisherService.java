@@ -1,18 +1,20 @@
 package gokhan.cihan.Library.business;
 
-import gokhan.cihan.Library.entity.Publisher;
-import org.springframework.data.domain.Page;
+import gokhan.cihan.Library.dto.request.PublisherRequest;
+import gokhan.cihan.Library.dto.response.PublisherResponse;
+
+import java.util.List;
 
 public interface IPublisherService {
 
-    Publisher getById(long id);
+    PublisherResponse getById(Long id);
 
-    Page<Publisher> getAll(int page, int pageSize);
+    List<PublisherResponse> getAll();
 
-    Publisher save(Publisher publisher);
+    PublisherResponse create(PublisherRequest publisherRequest);
 
-    Publisher update(Publisher publisher);
+    PublisherResponse update(Long id, PublisherRequest publisherRequest);
 
-    boolean delete(long id);
+    void delete(Long id);
 
 }

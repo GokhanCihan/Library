@@ -1,18 +1,20 @@
 package gokhan.cihan.Library.business;
 
-import gokhan.cihan.Library.entity.Author;
-import org.springframework.data.domain.Page;
+import gokhan.cihan.Library.dto.request.AuthorRequest;
+import gokhan.cihan.Library.dto.response.AuthorResponse;
+
+import java.util.List;
 
 public interface IAuthorService {
 
-    Author getById(long id);
+    AuthorResponse getById(Long id);
 
-    Page<Author> getAll(int page, int pageSize);
+    List<AuthorResponse> getAll();
 
-    Author save(Author author);
+    AuthorResponse create(AuthorRequest authorRequest);
 
-    Author update(Author author);
+    AuthorResponse update(Long id, AuthorRequest authorRequest);
 
-    boolean delete(long id);
+    void delete(Long id);
 
 }

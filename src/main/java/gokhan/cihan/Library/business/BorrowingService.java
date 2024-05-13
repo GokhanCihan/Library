@@ -1,47 +1,66 @@
 package gokhan.cihan.Library.business;
 
+import gokhan.cihan.Library.dto.mapper.BorrowingMapper;
+import gokhan.cihan.Library.dto.request.BorrowingRequest;
+import gokhan.cihan.Library.dto.response.BorrowingResponse;
 import gokhan.cihan.Library.entity.Borrowing;
 import gokhan.cihan.Library.repository.BorrowingRepository;
 import gokhan.cihan.Library.utilitiy.exceptionHandler.NotFoundException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BorrowingService implements IBorrowingService {
     private final BorrowingRepository borrowingRepository;
 
+    @Autowired
     public BorrowingService(BorrowingRepository borrowingRepository) {
         this.borrowingRepository = borrowingRepository;
     }
 
     @Override
-    public Borrowing getById(long id) {
-        return this.borrowingRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Borrowing data not found!"));
+    public BorrowingResponse getById(Long id) {
+        return BorrowingMapper.MAPPER.asOutput(this.borrowingRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Borrowing data by this id (" + id + ") not found!")));
     }
 
     @Override
-    public Page<Borrowing> getAll(int page, int pageSize) {
-        Pageable pageable = PageRequest.of(page, pageSize);
-        return this.borrowingRepository.findAll(pageable);
+    public List<BorrowingResponse> getAll() {
+        return BorrowingMapper.MAPPER.asOutput(borrowingRepository.findAll());
     }
 
     @Override
-    public Borrowing save(Borrowing borrowing) {
-        return this.borrowingRepository.save(borrowing);
+    public BorrowingResponse create(BorrowingRequest borrowingRequest) {
+        Optional<Borrowing> searchedBorrowing = borrowingRepository.findByBorrowerAndDateBorrowedAndDateReturned(
+                borrowingRequest.getBorrower(), borrowingRequest.getDateBorrowed(), borrowingRequest.getDateReturned());
+        if (searchedBorrowing.isEmpty()) {
+            Borrowing savedBorrowing = borrowingRepository.save(BorrowingMapper.MAPPER.asEntity(borrowingRequest));
+            return BorrowingMapper.MAPPER.asOutput(savedBorrowing);
+        }
+        throw new NotFoundException("Borrowing data already exists!");
     }
 
     @Override
-    public Borrowing update(Borrowing borrowing) {
-        this.getById(borrowing.getId());
-        return this.borrowingRepository.save(borrowing);
+    public BorrowingResponse update(Long id, BorrowingRequest borrowingRequest) {
+        Optional<Borrowing> borrowingFromDb = borrowingRepository.findById(id);
+        if (borrowingFromDb.isEmpty()) {
+            throw new NotFoundException("Borrowing data not found!");
+        }
+        Borrowing borrowing = borrowingFromDb.get();
+        BorrowingMapper.MAPPER.update(borrowing, borrowingRequest);
+        return BorrowingMapper.MAPPER.asOutput(borrowingRepository.save(borrowing));
     }
 
     @Override
-    public boolean delete(long id) {
-        this.borrowingRepository.delete(this.getById(id));
-        return false;
+    public void delete(Long id) {
+        Optional<Borrowing> borrowing = borrowingRepository.findById(id);
+        if (borrowing.isPresent()) {
+            borrowingRepository.delete(borrowing.get());
+        } else {
+            throw new NotFoundException("Borrowing data not found");
+        }
     }
 }

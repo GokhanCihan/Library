@@ -1,18 +1,20 @@
 package gokhan.cihan.Library.business;
 
-import gokhan.cihan.Library.entity.Book;
-import org.springframework.data.domain.Page;
+import gokhan.cihan.Library.dto.request.BookRequest;
+import gokhan.cihan.Library.dto.response.BookResponse;
+
+import java.util.List;
 
 public interface IBookService {
 
-    Book getById(long id);
+    BookResponse getById(Long id);
 
-    Page<Book> getAll(int page, int pageSize);
+    List<BookResponse> getAll();
 
-    Book save(Book book);
+    BookResponse create(BookRequest bookRequest);
 
-    Book update(Book book);
+    BookResponse update(Long id, BookRequest bookRequest);
 
-    boolean delete(long id);
+    void delete(Long id);
 
 }

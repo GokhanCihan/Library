@@ -1,47 +1,65 @@
 package gokhan.cihan.Library.business;
 
+import gokhan.cihan.Library.dto.mapper.PublisherMapper;
+import gokhan.cihan.Library.dto.request.PublisherRequest;
+import gokhan.cihan.Library.dto.response.PublisherResponse;
 import gokhan.cihan.Library.entity.Publisher;
 import gokhan.cihan.Library.repository.PublisherRepository;
 import gokhan.cihan.Library.utilitiy.exceptionHandler.NotFoundException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PublisherService implements IPublisherService {
     private final PublisherRepository publisherRepository;
 
+    @Autowired
     public PublisherService(PublisherRepository publisherRepository) {
         this.publisherRepository = publisherRepository;
     }
 
     @Override
-    public Publisher getById(long id) {
-        return this.publisherRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Publisher data not found!"));
+    public PublisherResponse getById(Long id) {
+        return PublisherMapper.MAPPER.asOutput(publisherRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Publisher data by id = " + id + " not found!")));
     }
 
     @Override
-    public Page<Publisher> getAll(int page, int pageSize) {
-        Pageable pageable = PageRequest.of(page, pageSize);
-        return this.publisherRepository.findAll(pageable);
+    public List<PublisherResponse> getAll() {
+        return PublisherMapper.MAPPER.asOutput(publisherRepository.findAll());
     }
 
     @Override
-    public Publisher save(Publisher publisher) {
-        return this.publisherRepository.save(publisher);
+    public PublisherResponse create(PublisherRequest publisherRequest) {
+        Optional<Publisher> searchedPublisher = publisherRepository.findByName(publisherRequest.getName());
+        if (searchedPublisher.isEmpty()){
+            Publisher savedPublisher = publisherRepository.save(PublisherMapper.MAPPER.asEntity(publisherRequest));
+            return PublisherMapper.MAPPER.asOutput(savedPublisher);
+        }
+        throw new NotFoundException("This publisher already exists!");
     }
 
     @Override
-    public Publisher update(Publisher publisher) {
-        this.getById(publisher.getId());
-        return this.publisherRepository.save(publisher);
+    public PublisherResponse update(Long id, PublisherRequest publisherRequest) {
+        Optional<Publisher> categoryFromDb = publisherRepository.findById(id);
+        if(categoryFromDb.isEmpty()) {
+            throw new NotFoundException("Publisher not found!");
+        }
+        Publisher publisher = categoryFromDb.get();
+        PublisherMapper.MAPPER.update(publisher, publisherRequest);
+        return PublisherMapper.MAPPER.asOutput(publisherRepository.save(publisher));
     }
 
     @Override
-    public boolean delete(long id) {
-        this.publisherRepository.delete(this.getById(id));
-        return false;
+    public void delete(Long id) {
+        Optional<Publisher> publisher = publisherRepository.findById(id);
+        if (publisher.isPresent()){
+            publisherRepository.delete(publisher.get());
+        }else {
+            throw new NotFoundException("Publisher data not found");
+        }
     }
 }
