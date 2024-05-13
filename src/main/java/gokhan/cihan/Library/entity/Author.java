@@ -15,13 +15,13 @@ public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false, unique = true)
-    private String author;
+    private String name;
 
     @Column(name = "year_of_birth")
-    private Year yearOfBirth;
+    private Integer yearOfBirth;
 
     private String country;
 

@@ -15,15 +15,15 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false)
     private String title;
 
     @Column(name = "year_published")
-    private Year yearPublished;
+    private Integer yearPublished;
 
-    private int stock;
+    private Integer stock;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "author_id", referencedColumnName = "id")
