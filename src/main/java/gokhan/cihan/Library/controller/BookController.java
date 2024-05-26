@@ -4,7 +4,6 @@ import gokhan.cihan.Library.service.IBookService;
 import gokhan.cihan.Library.dto.request.BookRequest;
 import gokhan.cihan.Library.dto.response.BookResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.List;
 public class BookController {
     private IBookService bookService;
 
-    @Autowired
     public BookController(IBookService bookService){
         this.bookService = bookService;
     }

@@ -10,7 +10,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("v1/category")
-@RequiredArgsConstructor
 public class CategoryController {
     public ICategoryService categoryService;
 

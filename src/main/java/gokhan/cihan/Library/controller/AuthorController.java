@@ -3,7 +3,6 @@ package gokhan.cihan.Library.controller;
 import gokhan.cihan.Library.service.IAuthorService;
 import gokhan.cihan.Library.dto.request.AuthorRequest;
 import gokhan.cihan.Library.dto.response.AuthorResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,9 +11,8 @@ import java.util.List;
 @RequestMapping("/v1/author")
 public class AuthorController {
 
-    private IAuthorService authorService;
+    private final IAuthorService authorService;
 
-    @Autowired
     public AuthorController(IAuthorService authorService) {
         this.authorService = authorService;
     }

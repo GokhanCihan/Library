@@ -12,6 +12,10 @@ import java.util.List;
 public class PublisherController {
     private IPublisherService publisherService;
 
+    public PublisherController(IPublisherService publisherService) {
+        this.publisherService = publisherService;
+    }
+
     @GetMapping("/{id}")
     public PublisherResponse getById(@PathVariable("id") Long id){
         return publisherService.getById(id);
