@@ -3,12 +3,14 @@ package gokhan.cihan.Library.controller;
 import gokhan.cihan.Library.service.IAuthorService;
 import gokhan.cihan.Library.dto.request.AuthorRequest;
 import gokhan.cihan.Library.dto.response.AuthorResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/author")
+@Tag(name = "Author Management")
 public class AuthorController {
 
     private final IAuthorService authorService;

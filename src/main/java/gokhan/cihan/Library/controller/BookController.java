@@ -3,6 +3,7 @@ package gokhan.cihan.Library.controller;
 import gokhan.cihan.Library.service.IBookService;
 import gokhan.cihan.Library.dto.request.BookRequest;
 import gokhan.cihan.Library.dto.response.BookResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/book")
-@RequiredArgsConstructor
+@Tag(name = "Book Management")
 public class BookController {
     private IBookService bookService;
 

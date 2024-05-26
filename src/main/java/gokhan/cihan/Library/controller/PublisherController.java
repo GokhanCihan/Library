@@ -3,14 +3,16 @@ package gokhan.cihan.Library.controller;
 import gokhan.cihan.Library.service.IPublisherService;
 import gokhan.cihan.Library.dto.request.PublisherRequest;
 import gokhan.cihan.Library.dto.response.PublisherResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/publisher")
+@Tag(name = "Publisher Management")
 public class PublisherController {
-    private IPublisherService publisherService;
+    private final IPublisherService publisherService;
 
     public PublisherController(IPublisherService publisherService) {
         this.publisherService = publisherService;

@@ -3,12 +3,14 @@ package gokhan.cihan.Library.controller;
 import gokhan.cihan.Library.service.IBorrowingService;
 import gokhan.cihan.Library.dto.request.BorrowingRequest;
 import gokhan.cihan.Library.dto.response.BorrowingResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("v1/borrowing")
+@Tag(name = "Borrowing Management")
 public class BorrowingController {
     private final IBorrowingService borrowingService;
 
