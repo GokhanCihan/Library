@@ -4,7 +4,6 @@ import gokhan.cihan.Library.service.ICategoryService;
 import gokhan.cihan.Library.dto.request.CategoryRequest;
 import gokhan.cihan.Library.dto.response.CategoryResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
