@@ -1,6 +1,6 @@
-package gokhan.cihan.Library.api;
+package gokhan.cihan.Library.controller;
 
-import gokhan.cihan.Library.business.IBookService;
+import gokhan.cihan.Library.service.IBookService;
 import gokhan.cihan.Library.dto.request.BookRequest;
 import gokhan.cihan.Library.dto.response.BookResponse;
 import lombok.RequiredArgsConstructor;

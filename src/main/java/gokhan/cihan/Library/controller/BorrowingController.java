@@ -1,6 +1,6 @@
-package gokhan.cihan.Library.api;
+package gokhan.cihan.Library.controller;
 
-import gokhan.cihan.Library.business.IBorrowingService;
+import gokhan.cihan.Library.service.IBorrowingService;
 import gokhan.cihan.Library.dto.request.BorrowingRequest;
 import gokhan.cihan.Library.dto.response.BorrowingResponse;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package gokhan.cihan.Library.business;
+package gokhan.cihan.Library.service;
 
 import gokhan.cihan.Library.dto.mapper.BookMapper;
 import gokhan.cihan.Library.dto.request.BookRequest;

@@ -1,6 +1,6 @@
-package gokhan.cihan.Library.api;
+package gokhan.cihan.Library.controller;
 
-import gokhan.cihan.Library.business.IPublisherService;
+import gokhan.cihan.Library.service.IPublisherService;
 import gokhan.cihan.Library.dto.request.PublisherRequest;
 import gokhan.cihan.Library.dto.response.PublisherResponse;
 import org.springframework.web.bind.annotation.*;

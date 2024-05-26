@@ -1,9 +1,8 @@
-package gokhan.cihan.Library.api;
+package gokhan.cihan.Library.controller;
 
-import gokhan.cihan.Library.business.IAuthorService;
+import gokhan.cihan.Library.service.IAuthorService;
 import gokhan.cihan.Library.dto.request.AuthorRequest;
 import gokhan.cihan.Library.dto.response.AuthorResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +10,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/author")
-@RequiredArgsConstructor
 public class AuthorController {
 
     private IAuthorService authorService;

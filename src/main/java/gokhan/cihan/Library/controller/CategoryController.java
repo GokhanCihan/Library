@@ -1,6 +1,6 @@
-package gokhan.cihan.Library.api;
+package gokhan.cihan.Library.controller;
 
-import gokhan.cihan.Library.business.ICategoryService;
+import gokhan.cihan.Library.service.ICategoryService;
 import gokhan.cihan.Library.dto.request.CategoryRequest;
 import gokhan.cihan.Library.dto.response.CategoryResponse;
 import lombok.RequiredArgsConstructor;

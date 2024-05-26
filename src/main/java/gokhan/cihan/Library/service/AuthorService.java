@@ -1,4 +1,4 @@
-package gokhan.cihan.Library.business;
+package gokhan.cihan.Library.service;
 
 import gokhan.cihan.Library.dto.mapper.AuthorMapper;
 import gokhan.cihan.Library.dto.request.AuthorRequest;
